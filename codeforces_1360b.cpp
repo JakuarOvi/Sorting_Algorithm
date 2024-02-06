@@ -24,40 +24,51 @@ we should substract each element a[i]-a[i+1] and take the minimum value as outpu
 
 #include<bits/stdc++.h>
 using namespace std;
+
 int main()
 {
-int n,i,j,temp;
-cin>>n;
-int a[n];
-// to take input 
-for(int i=0;i<n;i++)
-    {
-    cin>>a[i];
-    }
+    int t;
+    cin >> t;
 
+    while(t--)
+    {
+        int n;
+        cin >> n;
 
-for(int i=1;i<n;i++)
-    {
- int temp=a[i];
- int j=i-1;
- while(j>=0 && a[j]<temp)
-          {
-          a[j+1]=a[j];
-          j--;
-          } 
- a[j+1]=temp;
- 
-    }
-    int dif,s,min;
-    dif=a[0]-a[1];
-    for(int i=0;i<n;i++)
-    {
-        s=a[i]-a[i+1];
-        if(dif>s)
+        int a[n];
+        for(int i = 0; i < n; i++)
         {
-            min=s;
+            cin >> a[i];
         }
-       
+
+        // Insertion sort in descending order
+        for(int i = 1; i < n; i++)
+        {
+            int temp = a[i];
+            int j = i - 1;
+
+            while(j >= 0 && a[j] < temp)
+            {
+                a[j + 1] = a[j];
+                j--;
+            }
+            a[j + 1] = temp;
+        }
+
+        int dif, s, min_diff;
+        dif = a[0] - a[1];
+
+        for(int i = 0; i < n - 1; i++)
+        {
+            s = a[i] - a[i + 1];
+            if(dif >= s)
+            {
+                dif = s;
+            }
+        }
+
+        cout << dif << endl;
     }
- cout << min<< endl;
-}   
+
+    return 0;
+}
